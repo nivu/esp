@@ -51,7 +51,7 @@ int device_id = 1;
 // Ref : https://www.instructables.com/id/Arduino-Software-debouncing-in-interrupt-function/
 // Ref : https://www.switchdoc.com/2018/04/esp32-tutorial-debouncing-a-button-press-using-interrupts/
 
-// Interrupt 1
+// Interrupt 1 for weight data
 static volatile uint16_t intTriggerCount = 0;
 long debouncing_time = 1000; // in ms
 volatile unsigned long last_micros;
@@ -65,7 +65,7 @@ void IRAM_ATTR isr()
   }
 }
 
-// Interrupt 2
+// Interrupt 2 for temperature sensor
 static volatile uint16_t intTriggerCount2 = 0;
 long debouncing_time2 = 1000; // in ms
 volatile unsigned long last_micros2;
