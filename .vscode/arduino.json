@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:unowifi",
+    "programmer": "AVRISP mkII",
+    "sketch": "esp32\\BP_WH_TP_WiFi_POST_ESP32\\BP_WH_TP_WiFi_POST_ESP32.ino"
+}

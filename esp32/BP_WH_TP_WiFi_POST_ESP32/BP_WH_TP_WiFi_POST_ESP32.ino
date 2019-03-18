@@ -16,7 +16,7 @@ Sensor Tx  -> ESP32 RX0
 
 // Weight Machine
 HardwareSerial mySerial0(0);
-#define RXD0 3
+#define RXD0 3 // Connect to RS232 to TTL convertor's Rx pin
 #define TXD0 1
 
 // Temperature Sensor
@@ -39,8 +39,8 @@ String inputString = "";        // a String to hold incoming data
 boolean stringComplete = false; // whether the string is complete
 
 // network details
-const char *ssid = "KRISH_FTTH";
-const char *password = "KRISHtec@5747";
+const char *ssid = "KLNCE";
+const char *password = "IISCMSME";
 const char *host = "livemonitoring.co.in";
 //const char* host = "192.168.0.107";
 
@@ -249,13 +249,14 @@ void loop()
     tempRead = 1;
     Serial.printf(" Someone grounded pin 25 again, it is the %d's time!", intTriggerCount);
     Serial.println(" ");
+    mySerial0.flush();
   }
 
-  while (mySerial0.available() > 0 && tempRead == 1)
+  while (mySerial0.available() > 0)
   {
     char inChar = (char)mySerial0.read();
     inputString += inChar;
-    if (inChar == '\r')
+    if (inChar == '\r' && tempRead == 1)
     {
       weiRead += 1;
       stringComplete = true;
