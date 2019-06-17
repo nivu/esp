@@ -1,12 +1,17 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <ArduinoJson.h>
+
+// https://arduinojson.org/v6/doc/installation/
  
 const char* ssid = "KRISH_FTTH";
 const char* password =  "KRISHtec@5747";
 const char* mqttServer = "broker.hivemq.com"; //iot.eclipse.org
-const int mqttPort = 1883;
+const int mqttPort = 1883;  
 const char* mqttUser = "";
 const char* mqttPassword = "";
+
+int nodeId = 1; // change to your respective node id
  
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -29,7 +34,7 @@ void setup() {
   while (!client.connected()) {
     Serial.println("Connecting to MQTT...");
  
-    if (client.connect("ESP8266Client", mqttUser, mqttPassword )) {
+    if (client.connect("ESP8266Client-kt" + nodeId, mqttUser, mqttPassword )) {
  
       Serial.println("connected");  
  
@@ -42,7 +47,7 @@ void setup() {
     }
   }
  
-  client.publish("kt-data", "Hello from ESP8266");
+  //client.publish("kt-data", "Hello from ESP8266");
   client.subscribe("kt-control");
  
 }
@@ -64,4 +69,20 @@ void callback(char* topic, byte* payload, unsigned int length) {
  
 void loop() {
   client.loop();
+
+  int pin = 1;
+  int value = analogRead(A0);
+
+  char buffer[512];
+
+  StaticJsonDocument<200> doc;
+  doc["node"] = nodeId;
+  doc["pin"] = pin;
+  doc["value"] = value;
+  serializeJson(doc, buffer);
+
+  client.publish("kt-data/" + nodeId, buffer);
+  
+  delay(5000);
+
 }
