@@ -4,8 +4,8 @@
 
 // https://arduinojson.org/v6/doc/installation/
  
-const char* ssid = "KRISH_FTTH";
-const char* password =  "KRISHtec@5747";
+const char* ssid = "TP-LINK_DE40"; //"KRISH_FTTH";
+const char* password =  "password@1234"; // "KRISHtec@5747";
 const char* mqttServer = "broker.hivemq.com"; //iot.eclipse.org
 const int mqttPort = 1883;  
 const char* mqttUser = "";
@@ -34,7 +34,7 @@ void setup() {
   while (!client.connected()) {
     Serial.println("Connecting to MQTT...");
  
-    if (client.connect("ESP8266Client-kt" + nodeId, mqttUser, mqttPassword )) {
+    if (client.connect("ESP32Client-kt" + nodeId, mqttUser, mqttPassword )) {
  
       Serial.println("connected");  
  
@@ -61,6 +61,14 @@ void callback(char* topic, byte* payload, unsigned int length) {
   for (int i = 0; i < length; i++) {
     Serial.print((char)payload[i]);
   }
+
+  Serial.println("");
+   
+  if((char)payload[0] == '1') {
+    Serial.println("LED ON");
+  } else {
+    Serial.println("LED OFF");
+  }
  
   Serial.println();
   Serial.println("-----------------------");
@@ -72,7 +80,6 @@ void loop() {
 
   int pin = 1;
   int value = analogRead(A0);
-
   char buffer[512];
 
   StaticJsonDocument<200> doc;
@@ -81,7 +88,7 @@ void loop() {
   doc["value"] = value;
   serializeJson(doc, buffer);
 
-  client.publish("kt-data/" + nodeId, buffer);
+  client.publish("kt-data/1", buffer);
   
   delay(5000);
 

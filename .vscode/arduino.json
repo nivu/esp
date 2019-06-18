@@ -1,5 +1,7 @@
 {
-    "board": "arduino:avr:unowifi",
+    "board": "esp8266:esp8266:huzzah",
     "programmer": "AVRISP mkII",
-    "sketch": "esp32\\BP_WH_TP_WiFi_POST_ESP32\\BP_WH_TP_WiFi_POST_ESP32.ino"
+    "sketch": "esp8266\\esp8266_mqtt_kt\\esp8266_mqtt_kt.ino",
+    "configuration": "xtal=80,vt=flash,exception=disabled,ssl=all,eesz=4M,ip=lm2f,dbg=Disabled,lvl=None____,wipe=none,baud=115200",
+    "port": "COM3"
 }
