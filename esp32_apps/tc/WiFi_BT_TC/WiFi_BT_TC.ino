@@ -10,6 +10,15 @@
 // https://github.com/bblanchon/ArduinoJson
 #include <ArduinoJson.h>
 
+/* 
+
+BLE tutorial: https://desire.giesecke.tk/index.php/2018/04/06/esp32-wifi-setup-over-ble/
+
+Bluetooth tutorial: https://desire.giesecke.tk/index.php/2018/04/10/esp32-wifi-setup-over-bluetooth-serial/
+
+Companion Android app: https://play.google.com/store/apps/details?id=tk.giesecke.esp32wifible
+
+*/
 // Includes for Bluetooth Serial
 #include "BluetoothSerial.h"
 #include <Preferences.h>
