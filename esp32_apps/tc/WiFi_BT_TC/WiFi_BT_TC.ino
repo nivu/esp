@@ -316,6 +316,7 @@ void connectWiFi() {
   }
 }
 
+/*********************** Thermocouple Code Starts ************************/
 const char* host = "livemonitoring.co.in";
 
 #include "max6675.h"
